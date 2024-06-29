@@ -103,11 +103,11 @@
 <li>class BasicUiautomatorServer</li>
 <li>class SimpleUiautomatorServer</li>
 </ul>
-<h2 id="class-MockAdbProcess"><a href="#class-MockAdbProcess" class="headerlink" title="class MockAdbProcess"></a>class MockAdbProcess</h2><h2 id="def-launch-uiautomator"><a href="#def-launch-uiautomator" class="headerlink" title="def launch_uiautomator"></a>def launch_uiautomator</h2><p>作用:<br>重启 uiautomator2服务<br>用命令监测 uiautomator 是否正在运行：ps -A | grep uiautomator</p>
-<h2 id="class-HTTPResponse"><a href="#class-HTTPResponse" class="headerlink" title="class HTTPResponse"></a>class HTTPResponse</h2><p>作用：<br>处理http的Response</p>
-<p>图片：</p>
-<h2 id="def-http-request"><a href="#def-http-request" class="headerlink" title="def _http_request"></a>def _http_request</h2><p>作用：向 uiautomator2 server 发送 http 请求<br>先启动一个服务端口 xxx，将其 forward_port到设备的 uiautomator server端口9008<br>url&#x3D;<a href="http://127.0.0.1:lport/ping">http://127.0.0.1:lport/ping</a><br>发送 http请求给端上，解析 response，并返回解析结果<br>注：中间 if print_request 没啥用，应该是作者调试代码用<br>图片：</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2024/06/24/uiautomator2-core/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -183,7 +183,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博客主要记录小菜鸡走读python-uiautomator2-v3.1.0版本的一些理解。<br>在走读前期辅助理解运作链路时搜索到的大部分demo和博客都是基于v2.16.26版本的，所以，在理解的时候会对比着v2.16.26来看，于是顺带把架构图和代码结构区别也列在前面，但是本篇博客整体还是以v3.1.0版本的源码理解为主。<br>如果你看到这篇博客的时候发现写了一半，请不要着急，那说明我才读到这里。。。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博客主要记录小菜鸡走读python-uiautomator2-v3.1.0版本的一些理解。<br>在走读前期辅助理解运作链路时搜索到的大部分demo和博客都是基于v2.16.26版本的，所以，在理解的时候会对比着v2.16.26来看，顺带把两个版本架构图和代码结构区别也列在前面，但是本篇博客整体还是以v3.1.0版本的源码理解为主。<br>如果你看到这篇博客的时候发现写了一半，请不要着急，那说明我才读到这里或者暂时来不及写博客更新。。。</p>
 <p>本篇博客持续更新中。。。</p>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li>安装与使用【非重点暂时不做介绍，网上资料太多，后面有空补】</li>
@@ -208,39 +208,11 @@
 <li>代码走读期间踩过的一些坑和解决方案</li>
 <li>参考资料</li>
 </ul>
-<h2 id="一-安装与使用"><a href="#一-安装与使用" class="headerlink" title="一. 安装与使用"></a>一. 安装与使用</h2><p>略</p>
-<h2 id="二-uiautomator2发展简介"><a href="#二-uiautomator2发展简介" class="headerlink" title="二. uiautomator2发展简介"></a>二. uiautomator2发展简介</h2><p>由于到处资料都有这个的介绍了，本篇博客仅作概述，不会重点着墨于此。：</p>
-<ul>
-<li><p>阶段一：<br>uiautomator【基于Accessibility服务】：Google提供的用来做安卓自动化测试的一个Java库，基于Accessibility服务。功能很强，可以对第三方App进行测试，获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作，但有两个缺点：</p>
-<ul>
-<li>1.测试脚本只能使用Java语言 </li>
-<li>2.测试脚本要打包成jar或者apk包上传到设备上才能运行。</li>
-</ul>
-</li>
-<li><p>阶段二：希望测试逻辑能够用Python编写，能够在电脑上运行的时候就控制手机，于是有了这位大佬的作品：xiaocong&#x2F;uiautomator（链接）</p>
-<p>  实现原理：在手机上运行了一个http rpc服务，将uiautomator中的功能开放出来，然后再将这些http接口封装成Python库。</p>
-</li>
-<li><p>阶段三：对阶段二代码库的 bug进行修复，增加新 feature，称为 uiautomator2，也就是v2.x.x的</p>
-</li>
-<li><p>阶段四：这位大佬近期继续维护uiautomator2，并将其重构升级版本至 v3.1.0，后续可能还会有升级和bugfix，再更新吧。。。</p>
-</li>
-</ul>
-<h2 id="三-uiautomator2-v2-16-26与uiautomator2-v3-1-0的区别"><a href="#三-uiautomator2-v2-16-26与uiautomator2-v3-1-0的区别" class="headerlink" title="三. uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别"></a>三. uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别</h2><h3 id="v2-16-26与v3-1-0代码结构区别"><a href="#v2-16-26与v3-1-0代码结构区别" class="headerlink" title="v2.16.26与v3.1.0代码结构区别"></a>v2.16.26与v3.1.0代码结构区别</h3><p><img src="/.com//1_src_diff_test.png" alt="图片3-1"></p>
-<p>黑色区域为V3.1.0，白色区域为2.16.26，可以看到作者对整体代码库结构做了不小的调整，不过我没有重点阅读v2.16.26，所以对于这个不会做过多的解释， 后续有时间再填坑</p>
-<h3 id="v2-16-26与v3-1-0架构图区别"><a href="#v2-16-26与v3-1-0架构图区别" class="headerlink" title="v2.16.26与v3.1.0架构图区别"></a>v2.16.26与v3.1.0架构图区别</h3><pre><code>    - 粗粒度架构图V1（黑盒理解）
-    - 粗粒度架构图V2（灰盒理解）
-    - 细粒度架构图V1（白盒理解）
-</code></pre>
-<p>我先画了一些草图辅助理解一下，为啥这里要这么啰嗦分这么多粒度，因为我在小白时期上来就跟着细粒度的架构图，所以导致最开始总是没办法有更多耐心读下去。当然这里只是记录我自己的理解过程，觉得啰嗦可以跳过，挑自己感兴趣的看~</p>
-<p>图3-2：v2.16.26粗粒度架构图V1（黑盒理解）</p>
-<p>图3-3：V3.1.0粗粒度架构图V1（黑盒理解）</p>
-<p>图3-4：v2.16.26粗粒度架构图V2（灰盒理解）</p>
-<p>图3-5：V3.1.0粗粒度架构图V2（灰盒理解）</p>
-<p>图3-6：v2.16.26细粒度架构图V2（白盒理解）</p>
-<p>图3-7：V3.1.0细粒度架构图V2（白盒理解）</p>
-<h2 id="uiautomator2-v3-1-0代码结构及每个模块的内容"><a href="#uiautomator2-v3-1-0代码结构及每个模块的内容" class="headerlink" title="uiautomator2-v3.1.0代码结构及每个模块的内容"></a>uiautomator2-v3.1.0代码结构及每个模块的内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">uiautomator2</span><br><span class="line">	_archived 该文件夹中是一些历史代码，做备份用</span><br><span class="line">	asserts 该文件夹中主要放uiautomator</span><br><span class="line">	ext 文件夹</span><br><span class="line">	__init__.py 各种初始化操作，执行uiautomator2 init后都做了些什么</span><br><span class="line">	__main__.py</span><br><span class="line">	_input.py</span><br><span class="line">	_proto.py</span><br><span class="line">	_selector.py</span><br><span class="line">	abstract.py</span><br><span class="line">	core.py</span><br><span class="line">	exceptions.py</span><br><span class="line">	image.py</span><br><span class="line">	screenrecord.py</span><br><span class="line">	settings.py</span><br><span class="line">	swipe.py</span><br><span class="line">	utils.py</span><br><span class="line">	version.py</span><br><span class="line">	watcher.py</span><br><span class="line">	xpath.py</span><br></pre></td></tr></table></figure>
-
-<h3 id="core"><a href="#core" class="headerlink" title="core"></a>core</h3>
+        
+          <p class="article-more-link">
+            <a href="/2024/06/23/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">

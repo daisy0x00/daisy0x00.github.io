@@ -14,7 +14,7 @@
 <meta property="og:description" content="前言本篇博客是对uiautomator2-v3.1.0中core.py的详述 目录 class MockAdbProcess def launch_uiautomator class HTTPResponse def _http_request def _jsonrpc_call class BasicUiautomatorServer class SimpleUiautomatorServer">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-24T00:51:07.000Z">
-<meta property="article:modified_time" content="2024-06-24T01:02:49.562Z">
+<meta property="article:modified_time" content="2024-06-24T01:07:09.933Z">
 <meta property="article:author" content="Daisy">
 <meta name="twitter:card" content="summary">
   
@@ -105,11 +105,13 @@
 <li>class BasicUiautomatorServer</li>
 <li>class SimpleUiautomatorServer</li>
 </ul>
+<span id="more"></span>
+
 <h2 id="class-MockAdbProcess"><a href="#class-MockAdbProcess" class="headerlink" title="class MockAdbProcess"></a>class MockAdbProcess</h2><h2 id="def-launch-uiautomator"><a href="#def-launch-uiautomator" class="headerlink" title="def launch_uiautomator"></a>def launch_uiautomator</h2><p>作用:<br>重启 uiautomator2服务<br>用命令监测 uiautomator 是否正在运行：ps -A | grep uiautomator</p>
 <h2 id="class-HTTPResponse"><a href="#class-HTTPResponse" class="headerlink" title="class HTTPResponse"></a>class HTTPResponse</h2><p>作用：<br>处理http的Response</p>
 <p>图片：</p>
 <h2 id="def-http-request"><a href="#def-http-request" class="headerlink" title="def _http_request"></a>def _http_request</h2><p>作用：向 uiautomator2 server 发送 http 请求<br>先启动一个服务端口 xxx，将其 forward_port到设备的 uiautomator server端口9008<br>url&#x3D;<a href="http://127.0.0.1:lport/ping">http://127.0.0.1:lport/ping</a><br>发送 http请求给端上，解析 response，并返回解析结果<br>注：中间 if print_request 没啥用，应该是作者调试代码用<br>图片：</p>
-
+<h2 id="def-jsonrpc-call"><a href="#def-jsonrpc-call" class="headerlink" title="def _jsonrpc_call"></a>def _jsonrpc_call</h2>
       
     </div>
     <footer class="article-footer">
