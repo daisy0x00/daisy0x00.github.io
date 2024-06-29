@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>数据结构与算法（九）-堆排序 | 灰灰的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="目录 堆的基本概念 堆结构的HeapInsert操作 堆结构的Heapify操作 复杂度分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法（九）-堆排序">
+<meta property="og:url" content="http://example.com/2023/02/20/DataStructureAndAlgorithm9-HeapSort/index.html">
+<meta property="og:site_name" content="灰灰的博客">
+<meta property="og:description" content="目录 堆的基本概念 堆结构的HeapInsert操作 堆结构的Heapify操作 复杂度分析">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-19T18:32:53.000Z">
+<meta property="article:modified_time" content="2024-06-23T14:54:21.707Z">
+<meta property="article:author" content="Daisy">
+<meta property="article:tag" content="数据结构与算法">
+<meta property="article:tag" content="排序算法">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="灰灰的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">灰灰的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-DataStructureAndAlgorithm9-HeapSort" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/02/20/DataStructureAndAlgorithm9-HeapSort/" class="article-date">
+  <time class="dt-published" datetime="2023-02-19T18:32:53.000Z" itemprop="datePublished">2023-02-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      数据结构与算法（九）-堆排序
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>堆的基本概念</li>
+<li>堆结构的HeapInsert操作</li>
+<li>堆结构的Heapify操作</li>
+<li>复杂度分析</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="堆的基本概念"><a href="#堆的基本概念" class="headerlink" title="堆的基本概念"></a>堆的基本概念</h2><ol>
+<li>堆结构就是用数组实现的完全二叉树</li>
+<li>完全二叉树中如果每颗子树的最大值都在顶部就是大根堆</li>
+<li>完全二叉树中如果每颗子树的最小值都在顶部就是小根堆</li>
+<li>优先级队列结构，就是堆结构</li>
+</ol>
+<h3 id="堆结构"><a href="#堆结构" class="headerlink" title="堆结构"></a>堆结构</h3><p>堆结构就是用数组实现的完全二叉树</p>
+<p>完全二叉树：要么是一颗满二叉树，要么是一颗从左往右依次变满的二叉树</p>
+<p>如何支持一颗完全二叉树的结构？即实际结构如何实现？<br>将数组从零出发的连续一段对应成二叉树</p>
+<p>如何对应呢？<br>如果是数组连续一段，这一段到了哪里，我们使用一个变量size描述<br>此时size&#x3D;7，意味着我们将数组从0开始连续7个数作为二叉树的对应。连续的一段可以用size描述 </p>
+<p>位置关系如何描述？</p>
+<p>按照下标对应的树结构来讲：<br>i位置的左孩子：2<em>i+1<br>i位置的右孩子：2</em>i+2<br>i位置的父节点：（i-1）&#x2F;2</p>
+<p>当计算出来的值大于size则认为已越界，即当前节点不存在左孩子or右孩子or父节点</p>
+<p>有上述对应关系则可以把从0出发连续的一段脑补成一颗完全二叉树<br>只要是从0出发，size描述为几个数规定好，按照上述的下标兑换，即可得到一颗完全二叉树</p>
+<p>那么什么是堆呢？<br>堆是一种较为特殊的完全二叉树 ，其分为大根堆和小根堆</p>
+<h2 id="HeapInsert操作"><a href="#HeapInsert操作" class="headerlink" title="HeapInsert操作"></a>HeapInsert操作</h2><p>目前可以将数组从0出发的连续一小段对应为完全二叉树，如何将其对应成堆呢？<br>初始状态：<br>将刚才的size改名为heapsize&#x3D;0:表示数组从0出发的连续0个数是堆，即没有数，虽然在数组中申请了一个堆空间，但是一个数也没有用</p>
+<p>假设对外开放一个接口，用户可以依次给我一些数字，我把这些数字依次放在已经准备好的干净的数组上，如何让用户进来的每一个数字让整体构成一个大根堆<br>比如，用户给的第一个数5，此时将其放置在0位置。为什么？<br>因为现在heapsize告诉我们有连续的0个数是堆，新进来的数应该首先放置在0位置上，此时对应的完全二叉树<br>【5】图</p>
+<p>此时heapsize&#x3D;1，且为大根堆</p>
+<p>随后用户又提供了一个数3，将该数放在1位置，根据heapsize来看，将给的数放置在heapsize指向的位置，随后heapsize++，此时heapsize&#x3D;2，完全二叉树结构如下，此时依旧为大根堆</p>
+<p>【5， 3】</p>
+<p>接下来给一个数6，heapsize变成3，此时完全二叉树结构如下，<br>【5， 3， 6】<br>此时该树不再是大根堆，需要进行调整</p>
+<p>6所处的位置自己是知道的，即2位置，然后需要和自己的父节点作比较，根据下标变换(i - 1) &#x2F; 2求出父节点为0位置，随后跟0位置的数值进行比较，原则就是如果当前节点比父节点的值大，则进行交换，所以调整后的完全二叉树如图，此时该树是大根堆。<br>【6， 3， 5】</p>
+<p>假设用户又提供了一个数是7，将该数放在3位置，heapsize&#x3D;4，此时完全二叉树结构如下：<br>【6， 3， 5， 7】</p>
+<p>同样地，7根据下标变换(i - 1) &#x2F; 2求出父节点为1位置，随后跟1位置的数值进行比较，发现比自己父节点位置的数值大，故进行交换，此时刚才的7来到的1位置，完全二叉树结构如图。<br>【6， 7， 5， 3】</p>
+<p>此时继续用下标变换(i - 1) &#x2F; 2求出父节点为0位置，和0位置的数值进行比较，发现比自己父节点位置的数值大，再次进行交换，此时刚才的7来到0位置，完全二叉树结构如图<br>【7， 6， 5， 3】</p>
+<p>此时整棵树为大根堆</p>
+<p>规律：不断的往上换，只需和父节点比较，如果一直比父节点的值大则一路往上换，直到当前值已经来到头节点或者不再比父节点大了，就可以停止了。<br>【7， 6， 5， 3， 7】</p>
+<p>假如此时又来了一个7，此时将该数放在4位置，heapsize变成5,4位置通过如上的规律，知道此时需要找1位置的值进行比较，发现其比1位置的值大，则进行交换，此时完全二叉树结构如图<br>【7， 7， 5， 3， 6】</p>
+<p>继续和0位置进行比较，此时发现并没有比父节点的值大，PK失败，只是等于的关系，那么就不用交换了，停在1位置。</p>
+<p>这样一来，用户每给一个数据，都只用往上比，通过这样的调整判断可以保证用户每给我们一个数之后所形成的树均为大根堆。</p>
+<p>如果开辟一个数组，用户每给一个新的数，首先知道初始位置放哪里，放完之后只通过父节点的描述依次往上换，换到一个合适的位置所形成的样子必然是大根堆。</p>
+<p>上述过程我们将其称为heapinsert过程 </p>
+<p>代码实现如下：<br>假设数一开始在index位置，while：如果当前的数大于父位置的数，则index位置和父位置 的数进行交换，交换完成之后index来到交换的位置，随后继续while判断，直到遇到某一个位置不再比父位置的值大，则停止循环，或者该数已经来到了头的位置 。<br>PS :如果当前已经在头位置，那么(index-1)&#x2F;2&#x3D;0，依旧是0位置，此时arr[index]&#x3D;arr[(index-1)&#x2F;2]依然不满足循环条件,也会终止循环。<br>该while判断其实包含了两个条件分支</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">heapInsert</span><span class="params">(<span class="type">int</span>[] arr, <span class="type">int</span> index)</span> &#123;</span><br><span class="line">    <span class="keyword">while</span> (arr[index] &gt; arr[(index - <span class="number">1</span>) / <span class="number">2</span>]) &#123;</span><br><span class="line">        swap(arr, index, (index - <span class="number">1</span>) / <span class="number">2</span>);</span><br><span class="line">        index = (index - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Heapify操作"><a href="#Heapify操作" class="headerlink" title="Heapify操作"></a>Heapify操作</h2><p>用户给了一些数，并将其调整成大根堆<br>【6， 3， 5， 2， 3， 4】<br>假设此时用户不想再给数字，则此时heapsize&#x3D;6，<br>1）用户希望我们反馈出给过的所有数字中的最大值是多少，直接返回0位置的数字即可<br>2）用户希望我们反馈出给过的数字中的最大值，并将其从堆中移除，且其余的数字仍能构成大根堆<br>需要返回的最大值一定是0位置的6，此时先用临时变量记住该值 tmp&#x3D;6。<br>在返回之前，需要将6从大根堆上拿掉之后，让剩下的数字依然是大根堆的结构，需要如何操作？<br>在拿掉6之后，将大根堆的最后一个值放在0位置上，即将最后一个值4copy一份到0位置上，将6抹掉（没有关系，此时已经用临时变量tmp记录的6）<br>然后将heapsize-1&#x3D;5<br>当heapsize&#x3D;5是，5位置的值已经成为无效区域中的东西了，可能5位置还有数字，但是堆结构是由heapsize管理着哪一段连续的区域作为堆。<br>heapsize&#x3D;5已经决定了5位置的数已经不再算作堆的内容了。<br>当将5位置的数放在0位置之后，整体内容为<br>【4， 3， 5， 2， 3】<br>但此时可能不是大根堆结构，此时需要进行调整。<br>调整策略：<br>从头节点开始 ，现在左孩子和右孩子中选择一个最大值 ，然后和头节点PK，如果头节点PK失败，则最大值孩子和头节点交换。<br>假设有如下结构【a, b, c 】，现在b和c之间选择一个最大值，假设b为最大值，此时头节点a和b进行PK，假设b&gt;a,则此时结构调整为图</p>
+<p>若a下面还有孩子d，e,且d&gt;e，则此时a和e进行PK，若d&gt;a,则将d和a交换，此时整体结构如图xxx</p>
+<p>若其下面依旧有左右孩子，则继续进行上述操作，周而复始。<br>什么时候停？若当前来到一个位置，两个孩纸中最大的位置都不大于当前节点的值，就可以不用往下移动，或者不再有左孩子和右孩子了，这样一来我们可以保证剩下的值依旧保持大根堆结构</p>
+<p>例：有如下一组数据，返回其最大值，将其最大值移除，且需要保证剩下的数据依旧为大根堆<br>[9, 7, 8, 6, 5, 3, 2, 1]</p>
+<p>step1：返回9.将9存入临时变量中：tmp&#x3D;9</p>
+<p>step2：将最后一个值1，放到0位置，则此时为[1, 7, 8, 6, 5, 3, 2, 1]，如图xxx</p>
+<p>step3：调整heapsize，将最后的1与堆结构断联，即heapsize–，此时heapsize &#x3D; 8，此时数据的整体结构如图</p>
+<p>step4：从0位置出发，根据下标变换求出左孩子和右孩子的下标：<br>左孩子下标：2* i+1<br>右孩子下标：2*i+2<br>找到左孩子的值为7和右孩子的值8，此时右孩子为其中的最大值。<br>随后头节点即0位置和最大孩纸PK，右孩子的值8&gt;头节点的值1，故进行交换，此时结构如图xxx</p>
+<p>step5：同step4，调整完成后整体结构如图</p>
+<p>此时调整完后整体数据为大根堆。</p>
+<p>经过如上5步之后便可满足，返回当前数据的最大值，并将最大值从数组中移除，且剩余的数据依旧满足大根堆</p>
+<p>从一个位置出发往下移动的操作，我们将其称为heapify，表示堆化</p>
+<p>heapify代码如下：<br>index：从哪个位置开始往下做heapify（可以任何一个位置往下走做heapify）<br>heapsize：管理堆大小，计算左右孩子时判断其是否越界，一旦判断左孩子或者右孩子下标越界，此时便认为没有左孩子or右孩子<br>左孩子下标一定比右孩子下标小，如果左孩子下标越界，则表示此结点无左孩子，若无左孩子则必无孩子，所以left&lt;heapsize也是判断此时下方是否还有孩子<br>left+1表示右孩子的下标，<br>右孩子胜出的条件：若有右孩子，且右孩子的值大于左孩子，则此时largest的值为右孩子的下标。<br>左孩子胜出的条件：无右孩子或右孩子小于左孩子，则一定是左孩子胜出</p>
+<p>父与较大孩子之间，谁的值大，则将其下标给largest<br>较大孩纸若比父节点的值大，则largest的值不变，否则将父节点的下标赋值给largest </p>
+<p>此时父结点和孩纸环境中，将较大值的下标赋值给largest</p>
+<p>若largest&#x3D;&#x3D;index，则表示，父节点是连同左右孩子节点包括在内的环境中的最大值，此时代表不用继续往下走了，直接break即可</p>
+<p>若largest！&#x3D;index，则表示index一定要往下走，此时执行swap，将较大的孩子与当前节点交换<br>index往下走<br>新的左孩子的下标：index变完值之后的计算结果：即left&#x3D;index*2+1<br>然后继续回到while，进行判断，若不再有孩子，则while停止，若有孩子但是左右孩子均未PK过当前值，则直接break</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/02/20/DataStructureAndAlgorithm9-HeapSort/" data-id="clxrohxrw000wi8vf21wt81j4" data-title="数据结构与算法（九）-堆排序" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/06/23/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/02/20/DataStructureAndAlgorithm8-QuickSort/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据结构与算法-快排算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 15px;">排序算法</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 20px;">数据结构与算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/06/24/uiautomator2-core/">uiautomator2-v3.1.0-core</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/24/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1/">UIautomator2-源码解读</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/23/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">UIautomator2-v3.1.0源码解读</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/23/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/20/DataStructureAndAlgorithm9-HeapSort/">数据结构与算法（九）-堆排序</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Daisy<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

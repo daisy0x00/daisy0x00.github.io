@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>UIautomator2-v3.1.0源码解读 | 灰灰的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前言本篇博客主要记录小菜鸡走读python-uiautomator2-v3.1.0版本的一些理解。在走读前期辅助理解运作链路时搜索到的大部分demo和博客都是基于v2.16.26版本的，所以，在理解的时候会对比着v2.16.26来看，于是顺带把架构图和代码结构区别也列在前面，但是本篇博客整体还是以v3.1.0版本的源码理解为主。如果你看到这篇博客的时候发现写了一半，请不要着急，那说明我才读到这里。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIautomator2-v3.1.0源码解读">
+<meta property="og:url" content="http://example.com/2024/06/23/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:site_name" content="灰灰的博客">
+<meta property="og:description" content="前言本篇博客主要记录小菜鸡走读python-uiautomator2-v3.1.0版本的一些理解。在走读前期辅助理解运作链路时搜索到的大部分demo和博客都是基于v2.16.26版本的，所以，在理解的时候会对比着v2.16.26来看，于是顺带把架构图和代码结构区别也列在前面，但是本篇博客整体还是以v3.1.0版本的源码理解为主。如果你看到这篇博客的时候发现写了一半，请不要着急，那说明我才读到这里。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/.com//1_src_diff_test.png">
+<meta property="article:published_time" content="2024-06-23T15:02:41.000Z">
+<meta property="article:modified_time" content="2024-06-24T00:50:17.028Z">
+<meta property="article:author" content="Daisy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/.com//1_src_diff_test.png">
+  
+    <link rel="alternate" href="/atom.xml" title="灰灰的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">灰灰的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-UIautomator2-源码解读" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/23/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/" class="article-date">
+  <time class="dt-published" datetime="2024-06-23T15:02:41.000Z" itemprop="datePublished">2024-06-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      UIautomator2-v3.1.0源码解读
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博客主要记录小菜鸡走读python-uiautomator2-v3.1.0版本的一些理解。<br>在走读前期辅助理解运作链路时搜索到的大部分demo和博客都是基于v2.16.26版本的，所以，在理解的时候会对比着v2.16.26来看，于是顺带把架构图和代码结构区别也列在前面，但是本篇博客整体还是以v3.1.0版本的源码理解为主。<br>如果你看到这篇博客的时候发现写了一半，请不要着急，那说明我才读到这里。。。</p>
+<p>本篇博客持续更新中。。。</p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>安装与使用【非重点暂时不做介绍，网上资料太多，后面有空补】</li>
+<li>uiautomator2发展简介（基于网上的资料）</li>
+<li>uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别<ul>
+<li>v2.16.26与v3.1.0代码结构区别</li>
+<li>v2.16.26与v3.1.0架构图区别<ul>
+<li>粗粒度架构图V1（黑盒理解）</li>
+<li>粗粒度架构图V2（灰盒理解）</li>
+<li>细粒度架构图V1（白盒理解）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>uiautomator2-v3.1.0代码结构及每个模块的内容</li>
+<li>uiautomator2常用命令的原理&amp;基于v3.1.0版本源码走读<ul>
+<li>uiautomator2 init</li>
+<li>d &#x3D; u2.connect_usb()</li>
+<li>d(text&#x3D;”应用商店”)做了什么</li>
+</ul>
+</li>
+<li>代码走读期间踩过的一些坑和解决方案</li>
+<li>参考资料</li>
+</ul>
+<h2 id="一-安装与使用"><a href="#一-安装与使用" class="headerlink" title="一. 安装与使用"></a>一. 安装与使用</h2><p>略</p>
+<h2 id="二-uiautomator2发展简介"><a href="#二-uiautomator2发展简介" class="headerlink" title="二. uiautomator2发展简介"></a>二. uiautomator2发展简介</h2><p>由于到处资料都有这个的介绍了，本篇博客仅作概述，不会重点着墨于此。：</p>
+<ul>
+<li><p>阶段一：<br>uiautomator【基于Accessibility服务】：Google提供的用来做安卓自动化测试的一个Java库，基于Accessibility服务。功能很强，可以对第三方App进行测试，获取屏幕上任意一个APP的任意一个控件属性，并对其进行任意操作，但有两个缺点：</p>
+<ul>
+<li>1.测试脚本只能使用Java语言 </li>
+<li>2.测试脚本要打包成jar或者apk包上传到设备上才能运行。</li>
+</ul>
+</li>
+<li><p>阶段二：希望测试逻辑能够用Python编写，能够在电脑上运行的时候就控制手机，于是有了这位大佬的作品：xiaocong&#x2F;uiautomator（链接）</p>
+<p>  实现原理：在手机上运行了一个http rpc服务，将uiautomator中的功能开放出来，然后再将这些http接口封装成Python库。</p>
+</li>
+<li><p>阶段三：对阶段二代码库的 bug进行修复，增加新 feature，称为 uiautomator2，也就是v2.x.x的</p>
+</li>
+<li><p>阶段四：这位大佬近期继续维护uiautomator2，并将其重构升级版本至 v3.1.0，后续可能还会有升级和bugfix，再更新吧。。。</p>
+</li>
+</ul>
+<h2 id="三-uiautomator2-v2-16-26与uiautomator2-v3-1-0的区别"><a href="#三-uiautomator2-v2-16-26与uiautomator2-v3-1-0的区别" class="headerlink" title="三. uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别"></a>三. uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别</h2><h3 id="v2-16-26与v3-1-0代码结构区别"><a href="#v2-16-26与v3-1-0代码结构区别" class="headerlink" title="v2.16.26与v3.1.0代码结构区别"></a>v2.16.26与v3.1.0代码结构区别</h3><p><img src="/.com//1_src_diff_test.png" alt="图片3-1"></p>
+<p>黑色区域为V3.1.0，白色区域为2.16.26，可以看到作者对整体代码库结构做了不小的调整，不过我没有重点阅读v2.16.26，所以对于这个不会做过多的解释， 后续有时间再填坑</p>
+<h3 id="v2-16-26与v3-1-0架构图区别"><a href="#v2-16-26与v3-1-0架构图区别" class="headerlink" title="v2.16.26与v3.1.0架构图区别"></a>v2.16.26与v3.1.0架构图区别</h3><pre><code>    - 粗粒度架构图V1（黑盒理解）
+    - 粗粒度架构图V2（灰盒理解）
+    - 细粒度架构图V1（白盒理解）
+</code></pre>
+<p>我先画了一些草图辅助理解一下，为啥这里要这么啰嗦分这么多粒度，因为我在小白时期上来就跟着细粒度的架构图，所以导致最开始总是没办法有更多耐心读下去。当然这里只是记录我自己的理解过程，觉得啰嗦可以跳过，挑自己感兴趣的看~</p>
+<p>图3-2：v2.16.26粗粒度架构图V1（黑盒理解）</p>
+<p>图3-3：V3.1.0粗粒度架构图V1（黑盒理解）</p>
+<p>图3-4：v2.16.26粗粒度架构图V2（灰盒理解）</p>
+<p>图3-5：V3.1.0粗粒度架构图V2（灰盒理解）</p>
+<p>图3-6：v2.16.26细粒度架构图V2（白盒理解）</p>
+<p>图3-7：V3.1.0细粒度架构图V2（白盒理解）</p>
+<h2 id="uiautomator2-v3-1-0代码结构及每个模块的内容"><a href="#uiautomator2-v3-1-0代码结构及每个模块的内容" class="headerlink" title="uiautomator2-v3.1.0代码结构及每个模块的内容"></a>uiautomator2-v3.1.0代码结构及每个模块的内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">uiautomator2</span><br><span class="line">	_archived 该文件夹中是一些历史代码，做备份用</span><br><span class="line">	asserts 该文件夹中主要放uiautomator</span><br><span class="line">	ext 文件夹</span><br><span class="line">	__init__.py 各种初始化操作，执行uiautomator2 init后都做了些什么</span><br><span class="line">	__main__.py</span><br><span class="line">	_input.py</span><br><span class="line">	_proto.py</span><br><span class="line">	_selector.py</span><br><span class="line">	abstract.py</span><br><span class="line">	core.py</span><br><span class="line">	exceptions.py</span><br><span class="line">	image.py</span><br><span class="line">	screenrecord.py</span><br><span class="line">	settings.py</span><br><span class="line">	swipe.py</span><br><span class="line">	utils.py</span><br><span class="line">	version.py</span><br><span class="line">	watcher.py</span><br><span class="line">	xpath.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="core"><a href="#core" class="headerlink" title="core"></a>core</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/06/23/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/" data-id="clxrohxrx000xi8vf5r812fq3" data-title="UIautomator2-v3.1.0源码解读" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/06/24/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          UIautomator2-源码解读
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/06/23/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 15px;">排序算法</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 20px;">数据结构与算法</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10px;">递归</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/06/24/uiautomator2-core/">uiautomator2-v3.1.0-core</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/24/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1/">UIautomator2-源码解读</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/23/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">UIautomator2-v3.1.0源码解读</a>
+          </li>
+        
+          <li>
+            <a href="/2024/06/23/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/20/DataStructureAndAlgorithm9-HeapSort/">数据结构与算法（九）-堆排序</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Daisy<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
