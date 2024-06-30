@@ -18,13 +18,13 @@
 <meta property="og:site_name" content="灰灰的新屋">
 <meta property="og:description" content="前言本篇博客主要记录小菜鸡走读python-uiautomator2-v3.1.0版本的一些理解。在走读前期辅助理解运作链路时搜索到的大部分demo和博客都是基于v2.16.26版本的，所以，在理解的时候会对比着v2.16.26来看，顺带把两个版本架构图和代码结构区别也列在前面，但是本篇博客整体还是以v3.1.0版本的源码理解为主。如果你看到这篇博客的时候发现写了一半，请不要着急，那说明我才读到这">
 <meta property="og:locale">
-<meta property="og:image" content="http://daisy.javabin.cn/photo_2024/1_src_diff_test.png">
+<meta property="og:image" content="http://daisy.javabin.cn/photo_2024/uiautomatorv3_1_src_diff_test.png">
 <meta property="article:published_time" content="2024-06-23T15:02:41.000Z">
-<meta property="article:modified_time" content="2024-06-29T16:01:27.910Z">
+<meta property="article:modified_time" content="2024-06-30T07:54:30.289Z">
 <meta property="article:author" content="Daisy">
 <meta property="article:tag" content="daisy0x00的博客,博客,技术分析">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://daisy.javabin.cn/photo_2024/1_src_diff_test.png">
+<meta name="twitter:image" content="http://daisy.javabin.cn/photo_2024/uiautomatorv3_1_src_diff_test.png">
   
     <link rel="alternative" href="/atom.xml" title="灰灰的新屋" type="application/atom+xml">
   
@@ -261,7 +261,7 @@ var _hmt = _hmt || [];
 <li><p>阶段四：这位大佬近期继续维护uiautomator2，并将其重构升级版本至 v3.1.0，后续可能还会有升级和bugfix，再更新吧。。。</p>
 </li>
 </ul>
-<h2 id="三-uiautomator2-v2-16-26与uiautomator2-v3-1-0的区别"><a href="#三-uiautomator2-v2-16-26与uiautomator2-v3-1-0的区别" class="headerlink" title="三. uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别"></a>三. uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别</h2><h3 id="v2-16-26与v3-1-0代码结构区别"><a href="#v2-16-26与v3-1-0代码结构区别" class="headerlink" title="v2.16.26与v3.1.0代码结构区别"></a>v2.16.26与v3.1.0代码结构区别</h3><p><img src="/photo_2024/1_src_diff_test.png"></p>
+<h2 id="三-uiautomator2-v2-16-26与uiautomator2-v3-1-0的区别"><a href="#三-uiautomator2-v2-16-26与uiautomator2-v3-1-0的区别" class="headerlink" title="三. uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别"></a>三. uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别</h2><h3 id="v2-16-26与v3-1-0代码结构区别"><a href="#v2-16-26与v3-1-0代码结构区别" class="headerlink" title="v2.16.26与v3.1.0代码结构区别"></a>v2.16.26与v3.1.0代码结构区别</h3><p><img src="/photo_2024/uiautomatorv3_1_src_diff_test.png" alt="图片3-1"></p>
 <p>黑色区域为V3.1.0，白色区域为2.16.26，可以看到作者对整体代码库结构做了不小的调整，不过我没有重点阅读v2.16.26，所以不会对该版本内容做过多的解释， 后续有机会再填坑</p>
 <h3 id="v2-16-26与v3-1-0架构图区别"><a href="#v2-16-26与v3-1-0架构图区别" class="headerlink" title="v2.16.26与v3.1.0架构图区别"></a>v2.16.26与v3.1.0架构图区别</h3><p>我先画了一些草图辅助理解一下，为啥这里要这么啰嗦分这么多粒度，因为我在小白时期上来就跟着细粒度的架构图梳理，但由于信息量太大，所以最开始总是没有耐心读下去，一直处于从入门到放弃的状态。这里只是记录我自己的理解过程，觉得啰嗦可以跳过，挑自己感兴趣的看~</p>
 <h4 id="粗粒度架构图V1（黑盒理解）"><a href="#粗粒度架构图V1（黑盒理解）" class="headerlink" title="粗粒度架构图V1（黑盒理解）"></a>粗粒度架构图V1（黑盒理解）</h4><p>图3-2：v2.16.26粗粒度架构图V1（黑盒理解）</p>
@@ -394,11 +394,11 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2024/uiautomator2-core.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          UIautomator2-源码解读
+          uiautomator2-v3.1.0-core
         
       </div>
     </a>
@@ -965,6 +965,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">递归</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">test</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">uiautomator2源码解读</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">uiautomator2</a>
               </li>
             
             <div class="clearfix"></div>

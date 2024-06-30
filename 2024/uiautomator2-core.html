@@ -11,18 +11,22 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   
   
-  <meta name="description" content="前言本篇博客是对uiautomator2-v3.1.0中core.py的详述 目录 class MockAdbProcess def launch_uiautomator class HTTPResponse def _http_request def _jsonrpc_call class BasicUiautomatorServer class SimpleUiautomatorServer">
+  <meta name="description" content="前言本篇博客是对uiautomator2-v3.1.0中core.py的理解。这个模块的主要是一些uiautomator2server客户端的实现。 目录 class MockAdbProcess def launch_uiautomator class HTTPResponse def _http_request def _jsonrpc_call class BasicUiautomatorS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="uiautomator2-v3.1.0-core">
 <meta property="og:url" content="http://daisy.javabin.cn/2024/uiautomator2-core.html">
 <meta property="og:site_name" content="灰灰的新屋">
-<meta property="og:description" content="前言本篇博客是对uiautomator2-v3.1.0中core.py的详述 目录 class MockAdbProcess def launch_uiautomator class HTTPResponse def _http_request def _jsonrpc_call class BasicUiautomatorServer class SimpleUiautomatorServer">
+<meta property="og:description" content="前言本篇博客是对uiautomator2-v3.1.0中core.py的理解。这个模块的主要是一些uiautomator2server客户端的实现。 目录 class MockAdbProcess def launch_uiautomator class HTTPResponse def _http_request def _jsonrpc_call class BasicUiautomatorS">
 <meta property="og:locale">
+<meta property="og:image" content="http://daisy.javabin.cn/photo_2024/uiautomatorv3_core_1_launch_ui.png">
+<meta property="og:image" content="http://daisy.javabin.cn/photo_2024/uiautomatorv3_core_2_adb_forward.png">
 <meta property="article:published_time" content="2024-06-24T00:51:07.000Z">
-<meta property="article:modified_time" content="2024-06-24T01:07:09.933Z">
+<meta property="article:modified_time" content="2024-06-30T15:35:54.053Z">
 <meta property="article:author" content="Daisy">
-<meta property="article:tag" content="daisy0x00的博客,博客,技术分析">
+<meta property="article:tag" content="test">
+<meta property="article:tag" content="uiautomator2源码解读">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://daisy.javabin.cn/photo_2024/uiautomatorv3_core_1_launch_ui.png">
   
     <link rel="alternative" href="/atom.xml" title="灰灰的新屋" type="application/atom+xml">
   
@@ -215,7 +219,7 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
 	   
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博客是对uiautomator2-v3.1.0中core.py的详述</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博客是对uiautomator2-v3.1.0中core.py的理解。这个模块的主要是一些uiautomator2server客户端的实现。</p>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li>class MockAdbProcess</li>
 <li>def launch_uiautomator</li>
@@ -227,11 +231,62 @@ var _hmt = _hmt || [];
 </ul>
 <span id="more"></span>
 
-<h2 id="class-MockAdbProcess"><a href="#class-MockAdbProcess" class="headerlink" title="class MockAdbProcess"></a>class MockAdbProcess</h2><h2 id="def-launch-uiautomator"><a href="#def-launch-uiautomator" class="headerlink" title="def launch_uiautomator"></a>def launch_uiautomator</h2><p>作用:<br>重启 uiautomator2服务<br>用命令监测 uiautomator 是否正在运行：ps -A | grep uiautomator</p>
-<h2 id="class-HTTPResponse"><a href="#class-HTTPResponse" class="headerlink" title="class HTTPResponse"></a>class HTTPResponse</h2><p>作用：<br>处理http的Response</p>
+<h2 id="class-MockAdbProcess"><a href="#class-MockAdbProcess" class="headerlink" title="class MockAdbProcess"></a>class MockAdbProcess</h2><ul>
+<li><strong>init</strong></li>
+<li>output</li>
+<li>wait</li>
+<li>pool</li>
+<li>kill</li>
+</ul>
+<h2 id="def-launch-uiautomator"><a href="#def-launch-uiautomator" class="headerlink" title="def launch_uiautomator"></a>def launch_uiautomator</h2><p>作用:<br>重启 uiautomator2服务<br>用命令监测 uiautomator 是否正在运行：ps -A | grep uiautomator<br><img src="/photo_2024/uiautomatorv3_core_1_launch_ui.png" alt="图1-1 启动uiautomator"></p>
+<h2 id="class-HTTPResponse"><a href="#class-HTTPResponse" class="headerlink" title="class HTTPResponse"></a>class HTTPResponse</h2><ul>
+<li>json</li>
+<li>text</li>
+</ul>
+<h3 id="json"><a href="#json" class="headerlink" title="json"></a>json</h3><h3 id="text"><a href="#text" class="headerlink" title="text"></a>text</h3><p>作用：<br>处理http的Response</p>
 <p>图片：</p>
-<h2 id="def-http-request"><a href="#def-http-request" class="headerlink" title="def _http_request"></a>def _http_request</h2><p>作用：向 uiautomator2 server 发送 http 请求<br>先启动一个服务端口 xxx，将其 forward_port到设备的 uiautomator server端口9008<br>url&#x3D;<a href="http://127.0.0.1:lport/ping">http://127.0.0.1:lport/ping</a><br>发送 http请求给端上，解析 response，并返回解析结果<br>注：中间 if print_request 没啥用，应该是作者调试代码用<br>图片：</p>
-<h2 id="def-jsonrpc-call"><a href="#def-jsonrpc-call" class="headerlink" title="def _jsonrpc_call"></a>def _jsonrpc_call</h2>
+<h2 id="def-http-request"><a href="#def-http-request" class="headerlink" title="def _http_request"></a>def _http_request</h2><p>作用：向 uiautomator2 server 发送 http 请求</p>
+<ul>
+<li>先启动一个服务端口 xxx，将其 forward_port到设备的 uiautomator server端口9008</li>
+<li>url&#x3D;<a href="http://127.0.0.1:lport/ping">http://127.0.0.1:lport/ping</a></li>
+<li>发送 http请求给端上，解析 response，并返回解析结果</li>
+<li>捕获异常，返回异常信息<br>注：中间 if print_request 没啥用，应该是作者调试代码用<br>图片：<br><img src="/photo_2024/uiautomatorv3_core_2_adb_forward.png" alt="图1-2 adb forward"></li>
+</ul>
+<h2 id="def-jsonrpc-call"><a href="#def-jsonrpc-call" class="headerlink" title="def _jsonrpc_call"></a>def _jsonrpc_call</h2><p>作用：发送json-rpc请求给 uiautomator2 server，解析 result，如果有异常则分析后抛出异常，未捕获到异常则返回响应结果<br>具体逻辑：<br>封装 jsonrpc 需要的 payload，发送json-rpc请求</p>
+<h2 id="Class-BasicUiautomatorServer"><a href="#Class-BasicUiautomatorServer" class="headerlink" title="Class BasicUiautomatorServer"></a>Class BasicUiautomatorServer</h2><p>class BasicUiautomatorServer(AbstractUiautomatorServer)<br>在初始化时会执行start_uiautomator启动客户端的 uiautomator 服务</p>
+<p>解释：Simple uiautomator2 server client this is runs without atx-agent<br>初始化 u</p>
+<h3 id="init"><a href="#init" class="headerlink" title="init"></a><strong>init</strong></h3><h3 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h3><h3 id="debug-1"><a href="#debug-1" class="headerlink" title="debug"></a>debug</h3><h3 id="start-uiautomator"><a href="#start-uiautomator" class="headerlink" title="start_uiautomator"></a>start_uiautomator</h3><p>执行_do_start_uiautomator 启动 apk<br>如果抛出 APKSignatureError，卸载com.github.uiautomator、com.github.uiautomator.test后重新执行_do_start_uiautomator 启动 apk</p>
+<h3 id="do-start-uiautomator"><a href="#do-start-uiautomator" class="headerlink" title="_do_start_uiautomator"></a>_do_start_uiautomator</h3><p>作用：<br>具体实现：</p>
+<ul>
+<li>获取线程锁</li>
+<li>安装app-uiautomator.apk 和 app-uiautomator-test.apk</li>
+<li>self._process是干嘛的？如果self._process.pool()非空，则将self._process 置为空</li>
+<li>如果设备端的 uiautomator server 未启动，则：<ul>
+<li>启动uiautomator server</li>
+<li>等待 uiautomator server 启动成功</li>
+</ul>
+</li>
+</ul>
+<h3 id="setup-apks"><a href="#setup-apks" class="headerlink" title="_setup_apks"></a>_setup_apks</h3><p>作用：安装app-uiautomator.apk 和 app-uiautomator-test.apk<br>具体实现：</p>
+<ul>
+<li>获取 app-uiautomator.apk 和 app-uiautomator-test.apk的地址</li>
+<li>告诉你当前要安装的 app-uiautomator.apk的版本</li>
+<li>判断当前是否已有app-uiautomator.apk<ul>
+<li>若没有，则直接安装指定的版本</li>
+<li>若已安装，但版本不是当前指定版本，则做一堆处理【暂不细聊】</li>
+</ul>
+</li>
+</ul>
+<h3 id="install-apk"><a href="#install-apk" class="headerlink" title="_install_apk"></a>_install_apk</h3><p>作用：封装安装 apk 的操作</p>
+<h3 id="wait-instrument-ready"><a href="#wait-instrument-ready" class="headerlink" title="_wait_instrument_ready"></a>_wait_instrument_ready</h3><p>设置一个超时时间 deadline，监控 uiautomator2的 Instrumentation是否ready</p>
+<h3 id="wait-stub-ready"><a href="#wait-stub-ready" class="headerlink" title="_wait_stub_ready"></a>_wait_stub_ready</h3><p>设置一个超时时间 deadline，监控 uiautomator2 server stub是否ready</p>
+<h3 id="check-alive"><a href="#check-alive" class="headerlink" title="_check_alive"></a>_check_alive</h3><p>作用：检查server是否启动<br>具体实现<br>发送 http request 给设备，检查端上的 server是否启动成功</p>
+<h3 id="wait-ready"><a href="#wait-ready" class="headerlink" title="_wait_ready"></a>_wait_ready</h3><p>等待 instrumentation 和 stub 启动 OK</p>
+<h3 id="stop-uiautomator"><a href="#stop-uiautomator" class="headerlink" title="stop_uiautomator"></a>stop_uiautomator</h3><p>如果uiautomator2 server还活着，kill掉它，等待一定时间后再次检查一下，如果确定被 kill掉了，返回</p>
+<h3 id="jsonrpc-call"><a href="#jsonrpc-call" class="headerlink" title="jsonrpc_call"></a>jsonrpc_call</h3><p>向 uiautomator2发送 jsonrpc调用<br>如果抛了 HTTPError、UiAutomationNotConnectedError则 在重启 uiautomator之后重新发生 jsonrpc 调用</p>
+<h2 id="Class-SimpleUiautomatorServer"><a href="#Class-SimpleUiautomatorServer" class="headerlink" title="Class SimpleUiautomatorServer"></a>Class SimpleUiautomatorServer</h2><p> class SimpleUiautomatorServer(BasicUiautomatorServer, AbstractUiautomatorServer)</p>
+<h3 id="info"><a href="#info" class="headerlink" title="info"></a>info</h3><h3 id="dump-hierarchy"><a href="#dump-hierarchy" class="headerlink" title="dump_hierarchy"></a>dump_hierarchy</h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>android service中stub的作用<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/meegomeego/article/details/9612875">https://blog.csdn.net/meegomeego/article/details/9612875</a><br>关于jsonrpc<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shoshana-kong/p/14923075.html">https://www.cnblogs.com/shoshana-kong/p/14923075.html</a><br>Android Instrumentation<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/ouyanggengcheng/article/details/87935561">https://blog.csdn.net/ouyanggengcheng/article/details/87935561</a></p>
+
       
 
       
@@ -270,6 +325,21 @@ var _hmt = _hmt || [];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">test</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">uiautomator2源码解读</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -334,9 +404,18 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
+    <a href="/2024/uiautomator2-init.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          uiautomator2-init
+        
+      </div>
+    </a>
   
-    <a href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">UIautomator2-源码解读</div>
+  
+    <a href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UIautomator2-v3.1.0源码解读</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -896,6 +975,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">递归</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">test</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">uiautomator2源码解读</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">uiautomator2</a>
               </li>
             
             <div class="clearfix"></div>
