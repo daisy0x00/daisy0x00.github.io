@@ -6,20 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://daisy.javabin.cn">
-  <title>灰灰的新屋</title>
+  <title>数据结构与算法（九）-堆排序 | 灰灰的新屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   
   
-  <meta name="description" content="灰灰的新屋">
-<meta property="og:type" content="website">
-<meta property="og:title" content="灰灰的新屋">
-<meta property="og:url" content="http://daisy.javabin.cn/index.html">
+  <meta name="description" content="目录 堆的基本概念 堆结构的HeapInsert操作 堆结构的Heapify操作 复杂度分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法（九）-堆排序">
+<meta property="og:url" content="http://daisy.javabin.cn/2023/DataStructureAndAlgorithm9-HeapSort.html">
 <meta property="og:site_name" content="灰灰的新屋">
-<meta property="og:description" content="灰灰的新屋">
+<meta property="og:description" content="目录 堆的基本概念 堆结构的HeapInsert操作 堆结构的Heapify操作 复杂度分析">
 <meta property="og:locale">
+<meta property="article:published_time" content="2023-02-19T18:32:53.000Z">
+<meta property="article:modified_time" content="2024-06-23T14:54:21.707Z">
 <meta property="article:author" content="Daisy">
-<meta property="article:tag" content="daisy0x00的博客,博客,技术分析">
+<meta property="article:tag" content="数据结构与算法">
+<meta property="article:tag" content="排序算法">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="灰灰的新屋" type="application/atom+xml">
@@ -191,328 +194,14 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-uiautomator2-core" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-DataStructureAndAlgorithm9-HeapSort" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/uiautomator2-core.html">uiautomator2-v3.1.0-core</a>
-    </h1>
-  
-
-        
-        <a href="/2024/uiautomator2-core.html" class="archive-article-date">
-  	<time datetime="Mon Jun 24 2024 08:51:07 GMT+0800" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-24</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-	   
-      
-		
-	  
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博客是对uiautomator2-v3.1.0中core.py的详述</p>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li>class MockAdbProcess</li>
-<li>def launch_uiautomator</li>
-<li>class HTTPResponse</li>
-<li>def _http_request</li>
-<li>def _jsonrpc_call</li>
-<li>class BasicUiautomatorServer</li>
-<li>class SimpleUiautomatorServer</li>
-</ul>
-        
-          <a class="article-more-a" href="/2024/uiautomator2-core.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/uiautomator2-core.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-UIautomator2-源码解读-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1.html">UIautomator2-源码解读</a>
-    </h1>
-  
-
-        
-        <a href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1.html" class="archive-article-date">
-  	<time datetime="Mon Jun 24 2024 01:10:42 GMT+0800" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-24</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-	   
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-1.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-UIautomator2-源码解读" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB.html">UIautomator2-v3.1.0源码解读</a>
-    </h1>
-  
-
-        
-        <a href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB.html" class="archive-article-date">
-  	<time datetime="Sun Jun 23 2024 23:02:41 GMT+0800" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-23</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-	   
-      
-		
-	  
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本篇博客主要记录小菜鸡走读python-uiautomator2-v3.1.0版本的一些理解。<br>在走读前期辅助理解运作链路时搜索到的大部分demo和博客都是基于v2.16.26版本的，所以，在理解的时候会对比着v2.16.26来看，顺带把两个版本架构图和代码结构区别也列在前面，但是本篇博客整体还是以v3.1.0版本的源码理解为主。<br>如果你看到这篇博客的时候发现写了一半，请不要着急，那说明我才读到这里或者暂时来不及写博客更新。。。</p>
-<p>本篇博客持续更新中。。。</p>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li>安装与使用【非重点暂时不做介绍，网上资料太多，后面有空补】</li>
-<li>uiautomator2发展简介（基于网上的资料）</li>
-<li>uiautomator2-v2.16.26与uiautomator2-v3.1.0的区别<ul>
-<li>v2.16.26与v3.1.0代码结构区别</li>
-<li>v2.16.26与v3.1.0架构图区别<ul>
-<li>粗粒度架构图V1（黑盒理解）</li>
-<li>粗粒度架构图V2（灰盒理解）</li>
-<li>细粒度架构图V1（白盒理解）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>uiautomator2-v3.1.0代码结构及每个模块的内容</li>
-<li>uiautomator2常用命令的原理&amp;基于v3.1.0版本源码走读<ul>
-<li>uiautomator2 init</li>
-<li>d &#x3D; u2.connect_usb()</li>
-<li>d(text&#x3D;”应用商店”)做了什么</li>
-</ul>
-</li>
-<li>代码走读期间踩过的一些坑和解决方案</li>
-<li>参考资料</li>
-</ul>
-        
-          <a class="article-more-a" href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/UIautomator2-%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/hello-world.html">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2024/hello-world.html" class="archive-article-date">
-  	<time datetime="Sun Jun 23 2024 22:54:21 GMT+0800" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-06-23</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-	   
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/hello-world.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataStructureAndAlgorithm9-HeapSort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/DataStructureAndAlgorithm9-HeapSort.html">数据结构与算法（九）-堆排序</a>
+    <h1 class="article-title" itemprop="name">
+      数据结构与算法（九）-堆排序
     </h1>
   
 
@@ -527,19 +216,107 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
 	   
       
-		
-	  
         <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li>堆的基本概念</li>
 <li>堆结构的HeapInsert操作</li>
 <li>堆结构的Heapify操作</li>
 <li>复杂度分析</li>
 </ul>
-        
-          <a class="article-more-a" href="/2023/DataStructureAndAlgorithm9-HeapSort.html#more">more >></a>
-        
+<span id="more"></span>
+
+<h2 id="堆的基本概念"><a href="#堆的基本概念" class="headerlink" title="堆的基本概念"></a>堆的基本概念</h2><ol>
+<li>堆结构就是用数组实现的完全二叉树</li>
+<li>完全二叉树中如果每颗子树的最大值都在顶部就是大根堆</li>
+<li>完全二叉树中如果每颗子树的最小值都在顶部就是小根堆</li>
+<li>优先级队列结构，就是堆结构</li>
+</ol>
+<h3 id="堆结构"><a href="#堆结构" class="headerlink" title="堆结构"></a>堆结构</h3><p>堆结构就是用数组实现的完全二叉树</p>
+<p>完全二叉树：要么是一颗满二叉树，要么是一颗从左往右依次变满的二叉树</p>
+<p>如何支持一颗完全二叉树的结构？即实际结构如何实现？<br>将数组从零出发的连续一段对应成二叉树</p>
+<p>如何对应呢？<br>如果是数组连续一段，这一段到了哪里，我们使用一个变量size描述<br>此时size&#x3D;7，意味着我们将数组从0开始连续7个数作为二叉树的对应。连续的一段可以用size描述 </p>
+<p>位置关系如何描述？</p>
+<p>按照下标对应的树结构来讲：<br>i位置的左孩子：2<em>i+1<br>i位置的右孩子：2</em>i+2<br>i位置的父节点：（i-1）&#x2F;2</p>
+<p>当计算出来的值大于size则认为已越界，即当前节点不存在左孩子or右孩子or父节点</p>
+<p>有上述对应关系则可以把从0出发连续的一段脑补成一颗完全二叉树<br>只要是从0出发，size描述为几个数规定好，按照上述的下标兑换，即可得到一颗完全二叉树</p>
+<p>那么什么是堆呢？<br>堆是一种较为特殊的完全二叉树 ，其分为大根堆和小根堆</p>
+<h2 id="HeapInsert操作"><a href="#HeapInsert操作" class="headerlink" title="HeapInsert操作"></a>HeapInsert操作</h2><p>目前可以将数组从0出发的连续一小段对应为完全二叉树，如何将其对应成堆呢？<br>初始状态：<br>将刚才的size改名为heapsize&#x3D;0:表示数组从0出发的连续0个数是堆，即没有数，虽然在数组中申请了一个堆空间，但是一个数也没有用</p>
+<p>假设对外开放一个接口，用户可以依次给我一些数字，我把这些数字依次放在已经准备好的干净的数组上，如何让用户进来的每一个数字让整体构成一个大根堆<br>比如，用户给的第一个数5，此时将其放置在0位置。为什么？<br>因为现在heapsize告诉我们有连续的0个数是堆，新进来的数应该首先放置在0位置上，此时对应的完全二叉树<br>【5】图</p>
+<p>此时heapsize&#x3D;1，且为大根堆</p>
+<p>随后用户又提供了一个数3，将该数放在1位置，根据heapsize来看，将给的数放置在heapsize指向的位置，随后heapsize++，此时heapsize&#x3D;2，完全二叉树结构如下，此时依旧为大根堆</p>
+<p>【5， 3】</p>
+<p>接下来给一个数6，heapsize变成3，此时完全二叉树结构如下，<br>【5， 3， 6】<br>此时该树不再是大根堆，需要进行调整</p>
+<p>6所处的位置自己是知道的，即2位置，然后需要和自己的父节点作比较，根据下标变换(i - 1) &#x2F; 2求出父节点为0位置，随后跟0位置的数值进行比较，原则就是如果当前节点比父节点的值大，则进行交换，所以调整后的完全二叉树如图，此时该树是大根堆。<br>【6， 3， 5】</p>
+<p>假设用户又提供了一个数是7，将该数放在3位置，heapsize&#x3D;4，此时完全二叉树结构如下：<br>【6， 3， 5， 7】</p>
+<p>同样地，7根据下标变换(i - 1) &#x2F; 2求出父节点为1位置，随后跟1位置的数值进行比较，发现比自己父节点位置的数值大，故进行交换，此时刚才的7来到的1位置，完全二叉树结构如图。<br>【6， 7， 5， 3】</p>
+<p>此时继续用下标变换(i - 1) &#x2F; 2求出父节点为0位置，和0位置的数值进行比较，发现比自己父节点位置的数值大，再次进行交换，此时刚才的7来到0位置，完全二叉树结构如图<br>【7， 6， 5， 3】</p>
+<p>此时整棵树为大根堆</p>
+<p>规律：不断的往上换，只需和父节点比较，如果一直比父节点的值大则一路往上换，直到当前值已经来到头节点或者不再比父节点大了，就可以停止了。<br>【7， 6， 5， 3， 7】</p>
+<p>假如此时又来了一个7，此时将该数放在4位置，heapsize变成5,4位置通过如上的规律，知道此时需要找1位置的值进行比较，发现其比1位置的值大，则进行交换，此时完全二叉树结构如图<br>【7， 7， 5， 3， 6】</p>
+<p>继续和0位置进行比较，此时发现并没有比父节点的值大，PK失败，只是等于的关系，那么就不用交换了，停在1位置。</p>
+<p>这样一来，用户每给一个数据，都只用往上比，通过这样的调整判断可以保证用户每给我们一个数之后所形成的树均为大根堆。</p>
+<p>如果开辟一个数组，用户每给一个新的数，首先知道初始位置放哪里，放完之后只通过父节点的描述依次往上换，换到一个合适的位置所形成的样子必然是大根堆。</p>
+<p>上述过程我们将其称为heapinsert过程 </p>
+<p>代码实现如下：<br>假设数一开始在index位置，while：如果当前的数大于父位置的数，则index位置和父位置 的数进行交换，交换完成之后index来到交换的位置，随后继续while判断，直到遇到某一个位置不再比父位置的值大，则停止循环，或者该数已经来到了头的位置 。<br>PS :如果当前已经在头位置，那么(index-1)&#x2F;2&#x3D;0，依旧是0位置，此时arr[index]&#x3D;arr[(index-1)&#x2F;2]依然不满足循环条件,也会终止循环。<br>该while判断其实包含了两个条件分支</p>
+<pre><code class="java">public static void heapInsert(int[] arr, int index) &#123;
+    while (arr[index] &gt; arr[(index - 1) / 2]) &#123;
+        swap(arr, index, (index - 1) / 2);
+        index = (index - 1) / 2;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="Heapify操作"><a href="#Heapify操作" class="headerlink" title="Heapify操作"></a>Heapify操作</h2><p>用户给了一些数，并将其调整成大根堆<br>【6， 3， 5， 2， 3， 4】<br>假设此时用户不想再给数字，则此时heapsize&#x3D;6，<br>1）用户希望我们反馈出给过的所有数字中的最大值是多少，直接返回0位置的数字即可<br>2）用户希望我们反馈出给过的数字中的最大值，并将其从堆中移除，且其余的数字仍能构成大根堆<br>需要返回的最大值一定是0位置的6，此时先用临时变量记住该值 tmp&#x3D;6。<br>在返回之前，需要将6从大根堆上拿掉之后，让剩下的数字依然是大根堆的结构，需要如何操作？<br>在拿掉6之后，将大根堆的最后一个值放在0位置上，即将最后一个值4copy一份到0位置上，将6抹掉（没有关系，此时已经用临时变量tmp记录的6）<br>然后将heapsize-1&#x3D;5<br>当heapsize&#x3D;5是，5位置的值已经成为无效区域中的东西了，可能5位置还有数字，但是堆结构是由heapsize管理着哪一段连续的区域作为堆。<br>heapsize&#x3D;5已经决定了5位置的数已经不再算作堆的内容了。<br>当将5位置的数放在0位置之后，整体内容为<br>【4， 3， 5， 2， 3】<br>但此时可能不是大根堆结构，此时需要进行调整。<br>调整策略：<br>从头节点开始 ，现在左孩子和右孩子中选择一个最大值 ，然后和头节点PK，如果头节点PK失败，则最大值孩子和头节点交换。<br>假设有如下结构【a, b, c 】，现在b和c之间选择一个最大值，假设b为最大值，此时头节点a和b进行PK，假设b&gt;a,则此时结构调整为图</p>
+<p>若a下面还有孩子d，e,且d&gt;e，则此时a和e进行PK，若d&gt;a,则将d和a交换，此时整体结构如图xxx</p>
+<p>若其下面依旧有左右孩子，则继续进行上述操作，周而复始。<br>什么时候停？若当前来到一个位置，两个孩纸中最大的位置都不大于当前节点的值，就可以不用往下移动，或者不再有左孩子和右孩子了，这样一来我们可以保证剩下的值依旧保持大根堆结构</p>
+<p>例：有如下一组数据，返回其最大值，将其最大值移除，且需要保证剩下的数据依旧为大根堆<br>[9, 7, 8, 6, 5, 3, 2, 1]</p>
+<p>step1：返回9.将9存入临时变量中：tmp&#x3D;9</p>
+<p>step2：将最后一个值1，放到0位置，则此时为[1, 7, 8, 6, 5, 3, 2, 1]，如图xxx</p>
+<p>step3：调整heapsize，将最后的1与堆结构断联，即heapsize–，此时heapsize &#x3D; 8，此时数据的整体结构如图</p>
+<p>step4：从0位置出发，根据下标变换求出左孩子和右孩子的下标：<br>左孩子下标：2* i+1<br>右孩子下标：2*i+2<br>找到左孩子的值为7和右孩子的值8，此时右孩子为其中的最大值。<br>随后头节点即0位置和最大孩纸PK，右孩子的值8&gt;头节点的值1，故进行交换，此时结构如图xxx</p>
+<p>step5：同step4，调整完成后整体结构如图</p>
+<p>此时调整完后整体数据为大根堆。</p>
+<p>经过如上5步之后便可满足，返回当前数据的最大值，并将最大值从数组中移除，且剩余的数据依旧满足大根堆</p>
+<p>从一个位置出发往下移动的操作，我们将其称为heapify，表示堆化</p>
+<p>heapify代码如下：<br>index：从哪个位置开始往下做heapify（可以任何一个位置往下走做heapify）<br>heapsize：管理堆大小，计算左右孩子时判断其是否越界，一旦判断左孩子或者右孩子下标越界，此时便认为没有左孩子or右孩子<br>左孩子下标一定比右孩子下标小，如果左孩子下标越界，则表示此结点无左孩子，若无左孩子则必无孩子，所以left&lt;heapsize也是判断此时下方是否还有孩子<br>left+1表示右孩子的下标，<br>右孩子胜出的条件：若有右孩子，且右孩子的值大于左孩子，则此时largest的值为右孩子的下标。<br>左孩子胜出的条件：无右孩子或右孩子小于左孩子，则一定是左孩子胜出</p>
+<p>父与较大孩子之间，谁的值大，则将其下标给largest<br>较大孩纸若比父节点的值大，则largest的值不变，否则将父节点的下标赋值给largest </p>
+<p>此时父结点和孩纸环境中，将较大值的下标赋值给largest</p>
+<p>若largest&#x3D;&#x3D;index，则表示，父节点是连同左右孩子节点包括在内的环境中的最大值，此时代表不用继续往下走了，直接break即可</p>
+<p>若largest！&#x3D;index，则表示index一定要往下走，此时执行swap，将较大的孩子与当前节点交换<br>index往下走<br>新的左孩子的下标：index变完值之后的计算结果：即left&#x3D;index*2+1<br>然后继续回到while，进行判断，若不再有孩子，则while停止，若有孩子但是左右孩子均未PK过当前值，则直接break</p>
+<pre><code class="java">
+</code></pre>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2>
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/ali.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wx.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -563,16 +340,84 @@ var _hmt = _hmt || [];
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/DataStructureAndAlgorithm9-HeapSort.html">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://daisy.javabin.cn/2023/DataStructureAndAlgorithm9-HeapSort.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2024/hello-world.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/DataStructureAndAlgorithm8-QuickSort.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构与算法-快排算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -592,422 +437,30 @@ var _hmt = _hmt || [];
 
 
 
-
-  
-    <article id="post-DataStructureAndAlgorithm8-QuickSort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/DataStructureAndAlgorithm8-QuickSort.html">数据结构与算法-快排算法</a>
-    </h1>
-  
-
-        
-        <a href="/2023/DataStructureAndAlgorithm8-QuickSort.html" class="archive-article-date">
-  	<time datetime="Mon Feb 20 2023 02:29:22 GMT+0800" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-20</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-	   
-      
-		
-	  
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li>荷兰国旗问题（一）</li>
-<li>荷兰国旗问题（二）</li>
-<li>快排（1.0&#x2F;2.0&#x2F;3.0）</li>
-<li>快排算法的空间复杂度</li>
-</ul>
-        
-          <a class="article-more-a" href="/2023/DataStructureAndAlgorithm8-QuickSort.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/DataStructureAndAlgorithm8-QuickSort.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataStructureAndAlgorithm7-MergeSort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/DataStructureAndAlgorithm7-MergeSort.html">数据结构与算法（七）-归并排序</a>
-    </h1>
-  
-
-        
-        <a href="/2023/DataStructureAndAlgorithm7-MergeSort.html" class="archive-article-date">
-  	<time datetime="Mon Feb 20 2023 02:22:48 GMT+0800" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-20</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-	   
-      
-		
-	  
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li>归并排序</li>
-<li>归并排序的应用（一）：小和问题</li>
-<li>归并排序的应用（二）：逆序对问题</li>
-</ul>
-        
-          <a class="article-more-a" href="/2023/DataStructureAndAlgorithm7-MergeSort.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/DataStructureAndAlgorithm7-MergeSort.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataStructureAndAlgorithm6-Recursion" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/DataStructureAndAlgorithm6-Recursion.html">数据结构与算法（六）-用递归求数组中的最大值&amp;&amp;Master公式</a>
-    </h1>
-  
-
-        
-        <a href="/2023/DataStructureAndAlgorithm6-Recursion.html" class="archive-article-date">
-  	<time datetime="Mon Feb 20 2023 02:15:09 GMT+0800" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-20</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-	   
-      
-        <span id="more"></span>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">递归</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/DataStructureAndAlgorithm6-Recursion.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataStructureAndAlgorithm5-Dichotomy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/DataStructureAndAlgorithm5-Dichotomy.html">数据结构与算法（五)-二分法</a>
-    </h1>
-  
-
-        
-        <a href="/2023/DataStructureAndAlgorithm5-Dichotomy.html" class="archive-article-date">
-  	<time datetime="Mon Feb 20 2023 02:12:50 GMT+0800" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-20</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-	   
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/DataStructureAndAlgorithm5-Dichotomy.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DataStructureAndAlgorithm4-InsertSort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/DataStructureAndAlgorithm4-InsertSort.html">数据结构与算法（四）-插入排序</a>
-    </h1>
-  
-
-        
-        <a href="/2023/DataStructureAndAlgorithm4-InsertSort.html" class="archive-article-date">
-  	<time datetime="Mon Feb 20 2023 02:09:17 GMT+0800" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-20</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-	   
-      
-        <span id="more"></span>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">排序算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/DataStructureAndAlgorithm4-InsertSort.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'javabin-cn'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+  
+  
   
 
 
@@ -1434,8 +887,8 @@ var _hmt = _hmt || [];
 	});
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
